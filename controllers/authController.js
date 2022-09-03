@@ -2,6 +2,8 @@ const User = require('../models/userModel');
 const AppError = require('../utils/AppError');
 const catchAsync = require('../utils/catchAsync');
 const optGenerator = require('../utils/otp');
+const jwt = require('../utils/jwt');
+const Notification = require('../utils/Notification');
 
 exports.signUp = catchAsync(async (req, res, next) => {
   const {
@@ -69,5 +71,31 @@ exports.verifyOtp = catchAsync(async (req, res, next) => {
     data: {
       message: 'Account Verified! Pls Login',
     },
+  });
+});
+
+exports.login = catchAsync(async (req, res, next) => {
+  const { email, password, phone } = req.body;
+  if (!email && !phone) {
+    return next(new AppError('Please provide email or Phone', 400));
+  }
+  if (!password) {
+    return next(new AppError('Please provide password', 400));
+  }
+  const query = email ? { email: email } : { phone: phone };
+  const user = await User.findOne({ query }).select('+password');
+  console.log(user);
+  if (!user || !(await user.correctPassword(password, user.password))) {
+    return next(new AppError('Incorrect email or password', 401));
+  }
+  if (!user.isVerified) {
+    return next(new AppError('Please verify your account', 401));
+  }
+
+  jwt.createToken(res, req, user);
+  Notification.sendLogin(user);
+  res.status(200).json({
+    status: 'success',
+    user,
   });
 });

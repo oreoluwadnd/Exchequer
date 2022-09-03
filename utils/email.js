@@ -51,6 +51,16 @@ module.exports = class Email {
     );
   }
 
+  async sendLogin() {
+    await this.send(
+      'Exchequer Login Notification',
+      `You have successfully logged in ${new Date().toLocaleDateString(
+        'en-us',
+        { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' }
+      )}`
+    );
+  }
+
   async sendPasswordReset() {
     await this.send('Password Reset', 'You can reset your password here');
   }
