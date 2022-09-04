@@ -1,12 +1,13 @@
 const nodemailer = require('nodemailer');
 
 module.exports = class Email {
-  constructor(user, otp, url) {
+  constructor(user, otp, url, tag) {
     this.to = user.email;
     this.firstName = user.firstName;
     this.url = url;
     this.otp = otp;
     this.from = process.env.EMAIL_FROM;
+    this.tag = tag;
   }
 
   newTransport() {
@@ -59,6 +60,10 @@ module.exports = class Email {
         { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' }
       )}`
     );
+  }
+
+  async sendTag() {
+    await this.send('Tag created successfully', `Your new tag is @${this.tag}`);
   }
 
   async sendPasswordReset() {

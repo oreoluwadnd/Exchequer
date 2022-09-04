@@ -49,8 +49,8 @@ const userSchema = new mongoose.Schema({
     enum: ['user', 'admin'],
     default: 'user',
   },
-  accountNumber: {
-    type: Number,
+  tag: {
+    type: String,
     unique: true,
   },
   card: {},

@@ -84,18 +84,44 @@ exports.login = catchAsync(async (req, res, next) => {
   }
   const query = email ? { email: email } : { phone: phone };
   const user = await User.findOne({ query }).select('+password');
-  console.log(user);
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
   }
   if (!user.isVerified) {
     return next(new AppError('Please verify your account', 401));
   }
-
   jwt.createToken(res, req, user);
   Notification.sendLogin(user);
   res.status(200).json({
     status: 'success',
     user,
   });
+});
+exports.autheticateUser = catchAsync(async (req, res, next) => {
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
+  }
+  if (!token) {
+    return next(new AppError('Please login to access this route', 401));
+  }
+  console.log(token);
+  const decoded = await jwt.verifyToken(token);
+  console.log(decoded);
+  const user = await User.findById(decoded.id);
+  if (!user) {
+    return next(new AppError('User no longer exists', 401));
+  }
+  // if (user.changedPasswordAfter(decoded.iat)) {
+  //   return next(
+  //     new AppError('Password recently changed. Please login again', 401)
+  //   );
+  // }
+  req.user = user;
+  next();
 });

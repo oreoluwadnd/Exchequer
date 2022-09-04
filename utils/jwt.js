@@ -16,8 +16,6 @@ exports.verifyToken = (token) => {
   }
 };
 exports.createToken = (res, req, user) => {
-  console.log(user);
-  console.log(process.env.JWT_COOKIE_EXPIRES_IN);
   const token = signToken(user._id);
   res.cookie('jwt', token, {
     expires: new Date(
