@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const error = require('./middlewares/error');
 
 const userRoute = require('./routes/userRoutes');
+const accountRoute = require('./routes/accountRoutes');
 
 const app = express();
 app.use(express.json());
@@ -13,6 +14,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/users', userRoute);
+app.use('/api/v1/account', accountRoute);
 
 app.use(error);
 

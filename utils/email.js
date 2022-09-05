@@ -45,6 +45,34 @@ module.exports = class Email {
     await this.send('Welcome', "You're now a member");
   }
 
+  async sendSenderAlert(receiver, amount, id) {
+    await this.send(
+      'Debit Alert',
+      `You've successfully transferred money to ${receiver.firstName} ${receiver.lastName} of amount ${amount} with transaction id ${id}`
+    );
+  }
+
+  async sendReceierAlert(receiver, amount, id) {
+    await this.send(
+      'Credit Alert',
+      `You've received money of amount ${amount} from ${receiver.firstName} ${receiver.lastName} with transaction id ${id}`
+    );
+  }
+
+  async sendDeposit(amount, id) {
+    await this.send(
+      'Credit Alert',
+      `You've successfully deposited money of amount ${amount} with transaction id ${id}`
+    );
+  }
+
+  async sendWithdrawal(amount, id) {
+    await this.send(
+      'Debit Alert',
+      `You've successfully withdraw money of amount ${amount} with transaction id ${id}`
+    );
+  }
+
   async sendOtp() {
     await this.send(
       'Welcome to Exchequer!',

@@ -31,15 +31,17 @@ exports.otpCycle = async (user) => {
 
 exports.verifyOtp = async (user, otp) => {
   const hashedOtp = crypto.createHash('sha256').update(otp).digest('hex');
-  if (!hashedOtp === user.verificationCode) {
-    return false;
+  if (hashedOtp === user.verificationCode) {
+    return true;
   }
-  return true;
+  return false;
 };
 
 exports.verifyOtpExpiry = async (user) => {
-  if (Date.now() > user.verificationCodeExpires) {
-    return false;
+  console.log(user.verificationCodeExpires);
+  const date = Date.now();
+  if (user.verificationCodeExpires > date) {
+    return true;
   }
-  return true;
+  return false;
 };
