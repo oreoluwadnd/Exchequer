@@ -126,3 +126,48 @@ exports.withdrawMoney = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+exports.getBalance = catchAsync(async (req, res, next) => {
+  const { user } = req;
+  const balance = await User.findById(user._id);
+  res.status(200).json({
+    status: 'success',
+    data: {
+      balance,
+    },
+  });
+});
+
+exports.getMyTransactions = catchAsync(async (req, res, next) => {
+  const { user } = req;
+  const transactions = await Transaction.find({
+    $or: [{ sender: user._id }, { receiver: user._id }],
+  });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      transactions,
+    },
+  });
+});
+
+exports.getTransactionsById = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const transaction = await Transaction.findById(id);
+  res.status(200).json({
+    status: 'success',
+    data: {
+      transaction,
+    },
+  });
+});
+
+exports.getAllTransactions = catchAsync(async (req, res, next) => {
+  const transactions = await Transaction.find();
+  res.status(200).json({
+    status: 'success',
+    data: {
+      transactions,
+    },
+  });
+});

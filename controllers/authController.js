@@ -109,9 +109,9 @@ exports.autheticateUser = catchAsync(async (req, res, next) => {
   if (!token) {
     return next(new AppError('Please login to access this route', 401));
   }
-  console.log(token);
+
   const decoded = await jwt.verifyToken(token);
-  console.log(decoded);
+
   const user = await User.findById(decoded.id);
   if (!user) {
     return next(new AppError('User no longer exists', 401));
@@ -124,3 +124,30 @@ exports.autheticateUser = catchAsync(async (req, res, next) => {
   req.user = user;
   next();
 });
+
+exports.logout = (req, res) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({ status: 'success' });
+};
+
+exports.resendOtp = catchAsync(async (req, res, next) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    return next(new AppError('No user found with that email', 404));
+  }
+  const { hashedOtp, tokenExpires } = await optGenerator.otpCycle(user);
+  user.verificationCode = hashedOtp;
+  user.verificationCodeExpires = tokenExpires;
+  await user.save({ validateBeforeSave: false });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: user.email,
+      message: `Please check your ${user.verificationMethod} for your OTP`,
+    },
+  });
+}

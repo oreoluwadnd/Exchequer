@@ -16,5 +16,20 @@ Router.route('/transfer').post(
   authController.autheticateUser,
   accountController.transferMoney
 );
+//ADD TO CONTROLLER
+Router.route('/getBalance').get(
+  authController.autheticateUser,
+  accountController.getBalance
+);
+Router.route('/getMyTransactions').get(
+  authController.autheticateUser,
+  accountController.getMyTransactions
+);
+Router.route('/getTransactions/:id').get(
+  authController.autheticateUser,
+  accountController.getTransactionsById
+);
+
+Router.route('/getAllTrasactions').get(accountController.getAllTransactions);
 
 module.exports = Router;

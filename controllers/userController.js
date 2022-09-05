@@ -65,6 +65,8 @@ exports.getMe = CatchAsync(async (req, res, next) => {
     },
   });
 });
+
+//ADD FILTER  BODY
 exports.updateMe = CatchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfrim) {
     return next(
