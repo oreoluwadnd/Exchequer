@@ -150,4 +150,4 @@ exports.resendOtp = catchAsync(async (req, res, next) => {
       message: `Please check your ${user.verificationMethod} for your OTP`,
     },
   });
-}
+});
