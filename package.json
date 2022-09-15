@@ -4,8 +4,10 @@
   "description": "A simple banking application with node, express and mongo. ",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=development nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "NODE_ENV=development nodemon server.js",
+    "prod": "NODE_ENV=production nodemon server.js",
+    "debug": "ndb server.js"
   },
   "author": "Emmanuel Oreoluwa",
   "license": "ISC",
