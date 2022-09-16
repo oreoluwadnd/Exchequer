@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: ENV
-        run: echo ${{ secrets.GITHUB_TOKEN }}
+        run: echo ${{ secrets.OTP_LENGTH }}
       - name: Build
         run:
           npm run prod
