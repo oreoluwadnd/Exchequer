@@ -8,6 +8,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+     - name: Hello world action
+        env: # Or as an environment variable
+        CARD_LENGTH : ${{ secrets.CARD_LENGTH }}
+        CARD_SECRET : ${{ secrets.CARD_SECRET }}
+        DATABASE: ${{ secrets.DATABASE }}
+        DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+        CVV_SECRET: ${{ secrets.CVV_SECRET }}
+        DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+        EMAIL_FROM : ${{ secrets.EMAIL_FROM }}
+        JWT_COOKIE_EXPIRES_IN : ${{ secrets.JWT_COOKIE_EXPIRES_IN }}
+        JWT_EXPIRES_IN  : ${{ secrets.JWT_EXPIRES_IN }}
+        JWT_SECRET : ${{ secrets.JWT_SECRET }}
+        OTP_LENGTH : ${{ secrets.OTP_LENGTH }}
+        OTP_SECRET : ${{ secrets.OTP_SECRET }}
+        SENDGRID_PASSWORD : ${{ secrets.SENDGRID_PASSWORD }}
+        SENDGRID_USERNAME : ${{ secrets.SENDGRID_USERNAME }}
+        TWILIO_ACCOUNT_SID : ${{ secrets.TWILIO_ACCOUNT_SID }}
+        TWILIO_AUTH_TOKEN : ${{ secrets.TWILIO_AUTH_TOKEN }}
+        TWILIO_PHONE_NUMBER : ${{ secrets.TWILIO_PHONE_NUMBER }}
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
         uses: actions/setup-node@v1
