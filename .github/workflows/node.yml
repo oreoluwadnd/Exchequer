@@ -16,7 +16,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: ENV
-        run: echo ${{ secrets.OTP_LENGTH }}
+         env:
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
       - name: Build
         run:
           npm run prod
