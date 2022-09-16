@@ -9,7 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - name: Hello world action
-        env:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Install dependencies
+        run: npm install
+      - name: ENV
+       env:
         CARD_LENGTH : ${{ secrets.CARD_LENGTH }}
         CARD_SECRET : ${{ secrets.CARD_SECRET }}
         DATABASE: ${{ secrets.DATABASE }}
@@ -27,12 +35,5 @@ jobs:
         TWILIO_ACCOUNT_SID : ${{ secrets.TWILIO_ACCOUNT_SID }}
         TWILIO_AUTH_TOKEN : ${{ secrets.TWILIO_AUTH_TOKEN }}
         TWILIO_PHONE_NUMBER : ${{ secrets.TWILIO_PHONE_NUMBER }}
-      - uses: actions/checkout@v2
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - name: Install dependencies
-        run: npm install
       - name: Build
         run: npm run prod
