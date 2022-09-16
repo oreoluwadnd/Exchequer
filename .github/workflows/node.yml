@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: 14.x
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: ENV
         run: echo ${{ secrets.CARD_LENGTH }}
       - name: Build
