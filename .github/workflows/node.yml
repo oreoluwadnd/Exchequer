@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
+     steps:
      - name: Hello world action
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
