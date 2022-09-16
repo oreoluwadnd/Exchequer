@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - name: Hello world action
-        env: # Or as an environment variable
+        env:
         CARD_LENGTH : ${{ secrets.CARD_LENGTH }}
         CARD_SECRET : ${{ secrets.CARD_SECRET }}
         DATABASE: ${{ secrets.DATABASE }}
