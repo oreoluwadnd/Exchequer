@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: ENV
-        run: echo ${{ secrets.CARD_LENGTH }}
+        run: echo ${{ secrets.GITHUB_TOKEN }}
       - name: Build
         run:
           npm run prod
