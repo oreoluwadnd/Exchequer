@@ -29,7 +29,7 @@ The API is a RESTful API that allows you to perform the following operations:
 
 ## API Endpoints
 
--BASE_URL: <http://localhost:3000/api/v1>
+- BASE_URL: <http://localhost:3000/api/v1>
 
 ### Home
 
