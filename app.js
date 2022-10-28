@@ -56,30 +56,10 @@ app.use(cookieParser());
 app.use(mongoSanitize());
 //data sanitization against XSS
 app.use(xss());
-//prevent parameter pollution
-app.use(
-  hpp({
-    whitelist: [
-      'amount',
-      'tag',
-      'phone',
-      'name',
-      'email',
-      'password',
-      'passwordConfirm',
-      'passwordCurrent',
-      'passwordNew',
-    ],
-  })
-);
 //compress text sent to client
 app.use(compression());
 
 app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
 
 //routes
 app.use('/api/v1/users', userRoute);
