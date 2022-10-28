@@ -29,31 +29,14 @@ The API is a RESTful API that allows you to perform the following operations:
 
 ## API Endpoints
 
+-BASE_URL: <http://localhost:3000/api/v1>
+
 ### Home
 
-```text
+```
 - URL: '/'
 - HTTP Method: GET
 - Params: None
 - Headers: None
 ```
 
-### User
-
-- GET /api/users
-- GET /api/users/:id
-- POST /api/users
-- PATCH /api/users/:id
-- DELETE /api/users/:id
-
-#### Account
-
-- GET /api/accounts
-- GET /api/accounts/:id
-- POST /api/accounts
-- PATCH /api/accounts/:id
-- DELETE /api/accounts/:id
-
-#### Transaction
-
-- GET /api/transactions
