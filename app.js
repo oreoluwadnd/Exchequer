@@ -13,6 +13,7 @@ const error = require('./middlewares/error');
 
 const userRoute = require('./routes/userRoutes');
 const accountRoute = require('./routes/accountRoutes');
+const HomeRoute = require('./routes/HomeRoutes');
 
 // Start express app
 const app = express();
@@ -61,9 +62,7 @@ app.use(compression());
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Welcome To Exchequer!');
-});
+app.get('/', HomeRoute);
 
 //routes
 app.use('/api/v1/users', userRoute);

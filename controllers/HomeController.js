@@ -1,6 +1,6 @@
 const CatchAsync = require('../utils/catchAsync');
 
-exports.home = CatchAsync(async (req, res, next) => {
+exports.HomeController = CatchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
