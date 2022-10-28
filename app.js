@@ -61,6 +61,10 @@ app.use(compression());
 
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
 //routes
 app.use('/api/v1/users', userRoute);
 app.use('/api/v1/account', accountRoute);
