@@ -1,7 +1,7 @@
 # Exchequer
-
 An API that simulates Fintech processes for educational purposes.
-Originally developed to advance my understanding of Node.js, Express, and MongoDB, it is now freely accessible for use by anybody to build their own front-end applications (web or mobile).
+
+Developed initially to advance my understanding of Node.js, Express, and MongoDB, it is now freely accessible for anybody to build their own front-end applications (web or mobile).
 
 #### Requirements
 
