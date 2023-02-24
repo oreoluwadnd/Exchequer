@@ -26,7 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Step 1 - Echo out a GitHub Actions Secret to the logs
-        run: echo ${{ secrets.CARD_LENGTH }}
+        run: |
+          echo "The GitHub Action Secret will be masked:  "
+          echo ${{ secrets.CARD_LENGTH }}
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
         uses: actions/setup-node@v1
