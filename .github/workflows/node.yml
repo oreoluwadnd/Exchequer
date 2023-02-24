@@ -28,7 +28,7 @@ jobs:
       - name: Step 1 - Echo out a GitHub Actions Secret to the logs
         run: |
           echo "The GitHub Action Secret will be masked:  "
-          echo ${{ secrets.CARD_LENGTH }}
+          echo ${{ secrets.DATABASE }}
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
         uses: actions/setup-node@v1
