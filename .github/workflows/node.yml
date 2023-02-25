@@ -21,19 +21,20 @@ env:
   TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
   TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
   TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Step 1 - Echo out a GitHub Actions Secret to the logs
-        run: |
-          echo "The GitHub Action Secret will be masked:  "
-          echo ${{ secrets.DATABASE }}
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NODE_ENV: development
           CARD_LENGTH: ${{ secrets.CARD_LENGTH }}
           CARD_SECRET: ${{ secrets.CARD_SECRET }}
           DATABASE: ${{ secrets.DATABASE }}
@@ -50,7 +51,5 @@ jobs:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
-      - name: Install dependencies
-        run: npm ci
       - name: Build
         run: npm run prod
