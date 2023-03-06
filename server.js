@@ -11,11 +11,14 @@ const DB = process.env.DATABASE.replace(
 );
 
 mongoose
-  .connect(DB, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    dbName: 'Exchequer',
-  })
+  .connect(
+    'mongodb+srv://oreoluwa:UhcH2yXca8CgXxQM@cluster0.xmcax.mongodb.net/?retryWrites=true&w=majority',
+    {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+      dbName: 'Exchequer',
+    }
+  )
   .then(() => console.log('DB connection successful!'));
 
 const port = process.env.PORT || 3000;
