@@ -1,7 +1,12 @@
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = require('twilio')(accountSid, authToken);
+// const accountSid = process.env.TWILIO_ACCOUNT_SID;
+// const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(
+  'AC70bc43757d9cd42caec82ec478f8037f',
+  'b8d1c6807dde106a7cc0b28d136300ec'
+);
 
+// TWILIO_AUTH_TOKEN = b8d1c6807dde106a7cc0b28d136300ec;
+// TWILIO_ACCOUNT_SID = AC70bc43757d9cd42caec82ec478f8037f;
 module.exports = class Sms {
   constructor(user) {
     this.phone = user.phone;
