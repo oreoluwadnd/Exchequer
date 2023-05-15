@@ -52,7 +52,7 @@ exports.verifyOtp = catchAsync(async (req, res, next) => {
     '-__v -passwordChangedAt -passwordResetToken -passwordResetExpires'
   );
   if (!user) {
-    return next(new AppError('No user found with that email', 404));
+    return next(new AppError('No user found', 404));
   }
   const isOtpValid = await optGenerator.verifyOtp(user, otp);
   if (!isOtpValid) {

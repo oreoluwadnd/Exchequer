@@ -24,13 +24,13 @@ const server = app.listen(port, () =>
   console.log(`Server running on port ${port}`)
 );
 
-process.on('unhandledRejection', (err) => {
-  console.log(err.name, err.message);
-  console.log('UnhandledRejection! SHUTTING DOWN');
-  server.close(() => {
-    process.exit(1);
-  });
-});
+// process.on('unhandledRejection', (err) => {
+//   console.log(err.name, err.message);
+//   console.log('UnhandledRejection! SHUTTING DOWN');
+//   server.close(() => {
+//     process.exit(1);
+//   });
+// });
 process.on('SIGTERM', (err) => {
   console.log(err.name, err.message);
   console.log('SIGTERM RECEIVED! SHUTTING DOWN NICELY');

@@ -52,6 +52,21 @@ const userSchema = new mongoose.Schema({
   tag: {
     type: String,
   },
+  expense: {
+    type: Number,
+  },
+  Savings: {
+    safeLock: {
+      type: String,
+    },
+    PiggyBank: {
+      type: String,
+    },
+  },
+  income: {
+    type: Number,
+  },
+  quicksend: {},
   card: {},
   balance: {
     type: Number,

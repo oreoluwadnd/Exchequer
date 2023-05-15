@@ -18,8 +18,8 @@ exports.otpCycle = async (user) => {
     await sendOtp.sendOtp();
   }
   if (user.verificationMethod === 'phone') {
-    const sendOtp = new Sms(user.email, OTP);
-    sendOtp.sendOtp(OTP);
+    const sendSmsOtp = new Sms(user, OTP);
+    sendSmsOtp.sendOtp(OTP);
   }
   const hashedOtp = crypto.createHash('sha256').update(OTP).digest('hex');
   const tokenExpires = expires;
