@@ -13,7 +13,7 @@ module.exports = class Sms {
       .create({
         body: `Welcome to Exchequer! Your verification code is ${otp} and it expires in 5 minutes`,
         from: this.from,
-        to: '+2349019914984',
+        to: this.phone,
       })
       .catch((error) => console.log(error));
   }

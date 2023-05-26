@@ -6,15 +6,18 @@ const jwt = require('../utils/jwt');
 const Notification = require('../utils/Notification');
 
 exports.signUp = catchAsync(async (req, res, next) => {
-  const {
-    email,
-    phone,
-    password,
-    passwordConfirm,
-    verificationMethod,
-    firstName,
-    lastName,
-  } = req.body;
+  let { verificationMethod } = req.body;
+  const { email, phone, password, passwordConfirm, firstName, lastName } =
+    req.body;
+  if (!email && !phone) {
+    return next(new AppError('Please provide email or Phone', 400));
+  }
+  if (!password || !passwordConfirm) {
+    return next(new AppError('Please provide password', 400));
+  }
+  if (!req.body.verificationMethod) {
+    verificationMethod = 'email';
+  }
   const user = await User.create({
     firstName,
     lastName,
@@ -90,7 +93,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Please verify your account', 401));
   }
   jwt.createToken(res, req, user);
-  Notification.sendLogin(user);
+  // Notification.sendLogin(user);
   res.status(200).json({
     status: 'success',
     user,

@@ -20,7 +20,12 @@ const app = express();
 //trust proxy
 app.enable('trust proxy');
 //implement cors
-app.use(cors());
+app.use(
+  cors({
+    origin: ['http://localhost:5173', 'http://192.168.37.177:5173'],
+    credentials: true,
+  })
+);
 //set security http headers
 app.use(
   helmet.contentSecurityPolicy({
