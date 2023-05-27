@@ -66,6 +66,7 @@ exports.verifyOtp = catchAsync(async (req, res, next) => {
     return next(new AppError('OTP has expired', 400));
   }
   user.verificationCode = undefined;
+  user.balance = 2000;
   user.verificationCodeExpires = undefined;
   user.isVerified = true;
   await user.save({ validateBeforeSave: false });
