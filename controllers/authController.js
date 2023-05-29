@@ -16,7 +16,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
     return next(new AppError('Please provide password', 400));
   }
   if (!req.body.verificationMethod) {
-    verificationMethod = 'email';
+    verificationMethod = 'phone';
   }
   const user = await User.create({
     firstName,
