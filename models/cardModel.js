@@ -30,7 +30,7 @@ const transactionSchema = new mongoose.Schema({
   },
   cardType: {
     type: String,
-    enum: ['visa', 'master', 'verve'],
+    enum: ['visa', 'master', 'giftCard'],
   },
   CardHolder: {
     type: mongoose.Schema.ObjectId,
