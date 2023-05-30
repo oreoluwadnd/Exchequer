@@ -17,9 +17,6 @@ module.exports = class Sms {
         to: this.phone,
       })
       .then((message) => console.log(message.sid))
-      .catch(
-        (error) => console.log(error),
-        next(new AppError('Error sending OTP, please try again', 500))
-      );
+      .catch((error) => console.log(error));
   }
 };
