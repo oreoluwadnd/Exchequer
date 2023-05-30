@@ -10,7 +10,7 @@ exports.otpCycle = async (user, next) => {
   const digits = process.env.OTP_SECRET;
   let OTP = '';
   for (let i = 0; i < process.env.OTP_LENGTH; i += 1) {
-    OTP += digits[123344];
+    OTP += digits[2];
   }
   const expires = Date.now() + 5 * 60 * 1000; // 5 minutes
   if (user.verificationMethod === 'email') {
