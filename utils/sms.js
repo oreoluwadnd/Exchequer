@@ -1,6 +1,7 @@
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
+const AppError = require('./AppError');
 
 module.exports = class Sms {
   constructor(user) {
@@ -8,13 +9,17 @@ module.exports = class Sms {
     this.from = process.env.TWILIO_PHONE_NUMBER;
   }
 
-  sendOtp(otp) {
+  sendOtp(otp, next) {
     client.messages
       .create({
         body: `Welcome to Exchequer! Your verification code is ${otp} and it expires in 5 minutes`,
         from: this.from,
         to: this.phone,
       })
-      .catch((error) => console.log(error));
+      .then((message) => console.log(message.sid))
+      .catch(
+        (error) => console.log(error),
+        next(new AppError('Error sending OTP, please try again', 500))
+      );
   }
 };

@@ -6,7 +6,7 @@ const AppError = require('./AppError');
 
 dontenv.config({ path: './config.env' });
 
-exports.otpCycle = async (user) => {
+exports.otpCycle = async (user, next) => {
   const digits = process.env.OTP_SECRET;
   let OTP = '';
   for (let i = 0; i < process.env.OTP_LENGTH; i += 1) {
@@ -15,11 +15,16 @@ exports.otpCycle = async (user) => {
   const expires = Date.now() + 5 * 60 * 1000; // 5 minutes
   if (user.verificationMethod === 'email') {
     const sendOtp = new Email(user, OTP);
-    await sendOtp.sendOtp();
+    try {
+      await sendOtp.sendOtp();
+    } catch (err) {
+      console.log(err);
+      return next(new AppError('Error sending OTP, please try again', 500));
+    }
   }
   if (user.verificationMethod === 'phone') {
     const sendSmsOtp = new Sms(user, OTP);
-    sendSmsOtp.sendOtp(OTP);
+    sendSmsOtp.sendOtp(OTP, next);
   }
   const hashedOtp = crypto.createHash('sha256').update(OTP).digest('hex');
   const tokenExpires = expires;

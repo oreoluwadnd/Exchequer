@@ -33,7 +33,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
 exports.sendOtp = catchAsync(async (req, res, next) => {
   const { user } = req;
-  const { hashedOtp, tokenExpires } = await optGenerator.otpCycle(user);
+  const { hashedOtp, tokenExpires } = await optGenerator.otpCycle(user, next);
   user.verificationCode = hashedOtp;
   user.verificationCodeExpires = tokenExpires;
   await user.save({ validateBeforeSave: false });
