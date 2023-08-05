@@ -16,6 +16,26 @@ Router.route('/transfer').post(
   authController.autheticateUser,
   accountController.transferMoney
 );
+
+Router.route('/createCard').post(
+  authController.autheticateUser,
+  accountController.createCard
+);
+
+Router.route('/getAllCard').get(
+  authController.autheticateUser,
+  accountController.getCard
+);
+
+Router.route('/fundCard').post(
+  authController.autheticateUser,
+  accountController.depositCard
+);
+
+Router.route('/updateSavings').patch(
+  authController.autheticateUser,
+  accountController.updateSavingsType
+);
 //ADD TO CONTROLLER
 Router.route('/getBalance').get(
   authController.autheticateUser,

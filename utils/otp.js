@@ -12,7 +12,8 @@ exports.otpCycle = async (user) => {
   for (let i = 0; i < process.env.OTP_LENGTH; i += 1) {
     OTP += digits[Math.floor(Math.random() * 10)];
   }
-  const expires = Date.now() + 5 * 60 * 1000; // 5 minutes
+  const expires = Date.now() + 5 * 60 * 1000; // 5 minute
+  console.log(OTP);
   if (user.verificationMethod === 'email') {
     const sendOtp = new Email(user, OTP);
     await sendOtp.sendOtp();

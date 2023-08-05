@@ -68,11 +68,8 @@ app.use(compression());
 app.use(express.json());
 
 app.get('/', HomeRoute);
-
 //routes
 app.use('/api/v1/users', userRoute);
 app.use('/api/v1/account', accountRoute);
-
 app.use(error);
-
 module.exports = app;

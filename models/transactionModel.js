@@ -19,6 +19,16 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     enum: ['withdraw', 'transfer', 'deposit'],
   },
+  status: {
+    type: String,
+    default: 'success',
+    enum: ['pending', 'success', 'failed'],
+  },
+  date: {
+    type: Date,
+    required: [true, 'A user must have a last name'],
+    default: Date.now(),
+  },
 });
 const Transaction = mongoose.model('Transaction', transactionSchema);
 module.exports = Transaction;

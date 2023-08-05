@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 
-const transactionSchema = new mongoose.Schema({
-  name: {
-    type: String,
-  },
+const cardSchema = new mongoose.Schema({
   cardNumber: {
     type: Number,
   },
@@ -12,21 +9,26 @@ const transactionSchema = new mongoose.Schema({
   },
   cardBalance: {
     type: String,
+    default: 0,
   },
   billingAddress: {
     type: String,
+    default: '678 Joysticks Road RWE 908-3',
   },
   city: {
     type: String,
+    default: 'New York',
   },
   cvc: {
     type: Number,
   },
   state: {
     type: String,
+    default: 'Delaware',
   },
   zipCode: {
     type: String,
+    default: 201202,
   },
   cardType: {
     type: String,
@@ -37,5 +39,5 @@ const transactionSchema = new mongoose.Schema({
     ref: 'User',
   },
 });
-const Transaction = mongoose.model('Transaction', transactionSchema);
-module.exports = Transaction;
+const Card = mongoose.model('Card', cardSchema);
+module.exports = Card;

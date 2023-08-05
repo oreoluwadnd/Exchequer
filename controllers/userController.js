@@ -2,6 +2,21 @@ const User = require('../models/userModel');
 const CatchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 
+exports.searchEmail = CatchAsync(async (req, res, next) => {
+  const { data } = req.body;
+  console.log(data);
+  const Users = await User.find({
+    $text: { $search: data },
+  });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: 'yes',
+      Users,
+    },
+  });
+});
+
 exports.getAllUsers = CatchAsync(async (req, res, next) => {
   const users = await User.find();
   res.status(200).json({
@@ -27,8 +42,8 @@ exports.getUser = CatchAsync(async (req, res, next) => {
 });
 
 exports.updateUser = CatchAsync(async (req, res, next) => {
-  const { id } = req.params;
-  const user = await User.findByIdAndUpdate(id, req.body, {
+  const { user } = req;
+  const updateUser = await User.findByIdAndUpdate(user._id, req.body, {
     new: true,
     runValidators: true,
   });
@@ -38,14 +53,14 @@ exports.updateUser = CatchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      user,
+      updateUser,
     },
   });
 });
 
 exports.deleteUser = CatchAsync(async (req, res, next) => {
-  const { id } = req.params;
-  const user = await User.findByIdAndDelete(id);
+  const { user } = req;
+  const deleteUser = await User.findByIdAndDelete(user._id);
   if (!user) {
     return next(new AppError('No user found with that ID', 404));
   }

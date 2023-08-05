@@ -49,24 +49,30 @@ const userSchema = new mongoose.Schema({
     enum: ['user', 'admin'],
     default: 'user',
   },
-  tag: {
-    type: String,
-  },
-  expense: {
-    type: Number,
-  },
+
   Savings: {
     safeLock: {
-      type: String,
+      type: Number,
+      default: 0,
     },
     PiggyBank: {
-      type: String,
+      type: Number,
+      default: 0,
+    },
+    target: {
+      type: Number,
+      default: 0,
     },
   },
   income: {
     type: Number,
+    default: 0,
   },
-  quicksend: {},
+  expense: {
+    type: Number,
+    default: 0,
+  },
+  quicksend: [],
   card: {},
   balance: {
     type: Number,
@@ -81,7 +87,7 @@ const userSchema = new mongoose.Schema({
   verificationCode: String,
   verificationCodeExpires: Date,
 });
-
+userSchema.index({ firstName: 'text', lastName: 'text', email: 'text' });
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, 12);
